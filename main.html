@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>dropdownlist</title>
+	<link rel="stylesheet" type="text/css" href="css/layout.css" />
 </head>
 <body>
 	<div class="wrap"></div>
@@ -10,25 +11,15 @@
 	<script src="libs/jquery-1.9.1.min.js"></script>
 	<script src="dropdownlist.js"></script>
 	<script>
-// 	function Dropdownlist(config){
-// 		init: function(){
-// 			this.config = this.$.extend({
-// 				target: this.el || document.body
 
-// 			},config);
-
-// 			this.build();
-// 		},
-// 		build: function(){
-
-// 		}
-
-// }
 
 		var con = $('.wrap');
-		Dropdownlist.init({
+		var dropdownlist = new Dropdownlist();
+		dropdownlist.init({
 			target: con
 		});
+
+
 	</script>
 </body>
 </html>

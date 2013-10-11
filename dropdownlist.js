@@ -1,15 +1,17 @@
-function Dropdownlist(config){
-	return {
-		init: function(){
-			this.config = this.$.extend({
-				target: this.el || document.body
-
-			},config);
-
-			this.build();
-		},
-		build: function(){
-
-		}
-	}
+function Dropdownlist(){
 }
+
+Dropdownlist.prototype ={
+	init: function(config){
+		this.config = $.extend({
+			target: document.body
+		},config);
+
+		this.build();
+	},
+	build: function(){
+		var c = this.config;
+		$('<div class="Dropdownlist">').text("ddd").appendTo(c.target);
+
+	}
+};
