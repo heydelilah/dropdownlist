@@ -12,11 +12,37 @@
 	<script src="dropdownlist.js"></script>
 	<script>
 
+		// 测试数据
+		var dataSinger = [
+			{
+				id:1,
+				name:'Lana del rey'
+			},
+			{
+				id:2,
+				name:'Sarah Russell'
+			},
+			{
+				id:3,
+				name:'The pretty reckless'
+			},
+			{
+				id:4,
+				name:'Lady and bird'
+			},
+			{
+				id:5,
+				name:'Lily allen'
+			}
+		];
 
 		var con = $('.wrap');
 		var dropdownlist = new Dropdownlist();
 		dropdownlist.init({
-			target: con
+			'target': con,
+			'default':'Select a singer',
+			'options': dataSinger,
+			'label':'Favorite'
 		});
 
 
