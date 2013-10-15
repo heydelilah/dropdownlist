@@ -3,7 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>dropdownlist</title>
-	<link rel="stylesheet" type="text/css" href="css/layout.css" />
+	<link rel="stylesheet" type="text/css" href="css/dropdownlist.css" />
+	<link rel="stylesheet" type="text/css" href="css/main.css" />
 </head>
 <body>
 	<div class="wrap"></div>
@@ -42,8 +43,18 @@
 			'target': con,
 			'default':'Select a singer',
 			'options': dataSinger,
-			'label':'Favorite'
+			'label':'Favorite',
+			'search':true
 		});
+
+		// 测试setData
+		// dropdownlist.setData(dataSinger);
+
+		// 测试getData
+		// $('<button type="button">保存</button>').appendTo(con).on('click',function(ev) {
+		// 	var data = dropdownlist.getData();
+		// 	console.log(data);
+		// });
 
 
 	</script>

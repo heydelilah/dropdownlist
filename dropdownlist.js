@@ -11,7 +11,8 @@ Dropdownlist.prototype ={
 			'name':'name',
 			'width':200,
 			'height': 20,
-			'label':''
+			'label':'标签',
+			'search':false
 		},config);
 		this.$firstToggle = true;
 
@@ -22,13 +23,13 @@ Dropdownlist.prototype ={
 		var doms = this.doms = {};
 
 		if(c.label){
-			$('<div class="label"/>').text(c.label).appendTo(c.target);
+			$('<label class="DropdownlistTitle"/>').text(c.label).appendTo(c.target);
 		}
 
-		var tmp = $('<div class="Dropdownlist"><div class="header"><div class="arrow"></div></div></div>').appendTo(c.target);
-		doms.result = $('<div class="result"><div>').text(c.default).prependTo(tmp.find(".header"));
+		var tmp = $('<div class="Dropdownlist"><div class="DropdownlistHeader"><div class="arrow"></div></div></div>').appendTo(c.target);
+		doms.result = $('<div class="result"><div>').text(c.default).prependTo(tmp.find(".DropdownlistHeader"));
 		doms.wrap = tmp;
-		tmp.on('click',".header",this,this.eventToggleList);
+		tmp.on('click',".DropdownlistHeader",this,this.eventToggleList);
 	},
 	// 下拉菜单显示-隐藏响应事件
 	eventToggleList: function(ev){
@@ -36,28 +37,40 @@ Dropdownlist.prototype ={
 		var c = me.config;
 		var doms = me.doms;
 		if(me.$firstToggle){
-			me.buildOptions();
+			me.buildOptions(c.options);
 			me.$firstToggle = false;
-		}else{
-			doms.list.toggle();
 		}
+
+		doms.list.toggle();
 	},
 	setData: function(data){
+		this.buildOptions(data);
 	},
 	getData: function(){
+		return this.doms.result.text();
 	},
 	reset: function(){
 	},
 	// 构建选项
-	buildOptions: function(){
-		var c = this.config;
+	buildOptions: function(data){
 		var doms = this.doms;
-		var list = doms.list = $('<div class="list">').appendTo(doms.wrap);
-		for(var i in c.options){
-			var elm = c.options[i];
-			var a = $('<a class="option"/>').attr('key',elm.id).text(elm.name).appendTo(list);
-			a.on('click',{self:this,elm:a},this.eventOptionSelect);
+		var c = this.config;
+		var list = doms.list = $('<div class="DropdownlistList">').appendTo(doms.wrap);
+		if(c.search){
+			// @todo 样式还需微调
+			var search = $('<div class="search option"><i></i></div>').appendTo(list);
+			$('<input type="text"/>').width(c.width-12).prependTo(search);
 		}
+		if(typeof data === 'object'){
+			for(var i in data){
+				var elm = data[i];
+				var a = $('<a class="option"/>').attr('key',elm.id).text(elm.name).appendTo(list);
+				a.on('click',{self:this,elm:a},this.eventOptionSelect);
+			}
+		}else{
+			$('<a class="option"/>').text('--- 无数据 ---').appendTo(list);
+		}
+		this.$firstToggle = false;
 	},
 	// 选择选项响应事件
 	eventOptionSelect: function(ev){
@@ -65,6 +78,7 @@ Dropdownlist.prototype ={
 		var elm = ev.data.elm;
 
 		doms.result.text(elm.text());
+		doms.result.attr('key',elm.attr('key'));
 		doms.list.toggle();
 		elm.addClass('act').siblings().removeClass('act');
 	}
