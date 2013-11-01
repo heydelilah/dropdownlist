@@ -1,0 +1,9 @@
+body {
+  font-family: Georgia;
+}
+body .wrap {
+  padding: 20px 10px;
+}
+body .wrap button {
+  margin-top: 1em;
+}
