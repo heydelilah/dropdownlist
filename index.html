@@ -2,12 +2,56 @@
 layout: default
 title: Dropdownlist
 ---
-<header>
-	<h2>{{ page.title }}</h2>
-	<p></p>
-</header>
+<body>
+	<div class="wrap"></div>
+
+	<script src="libs/jquery-1.9.1.min.js"></script>
+	<script src="dropdownlist.js"></script>
+	<script>
+
+		// 测试数据
+		var dataSinger = [
+			{
+				id:1,
+				name:'Lana del rey'
+			},
+			{
+				id:2,
+				name:'Sarah Russell'
+			},
+			{
+				id:3,
+				name:'The pretty reckless'
+			},
+			{
+				id:4,
+				name:'Lady and bird'
+			},
+			{
+				id:5,
+				name:'Lily allen'
+			}
+		];
+
+		var con = $('.wrap');
+		var dropdownlist = new Dropdownlist();
+		dropdownlist.init({
+			'target': con,
+			'default':'Select a singer',
+			'options': dataSinger,
+			'label':'Favorite',
+			'search':true
+		});
+
+		// 测试setData
+		// dropdownlist.setData(dataSinger);
+
+		// 测试getData
+		// $('<button type="button">保存</button>').appendTo(con).on('click',function(ev) {
+		// 	var data = dropdownlist.getData();
+		// 	console.log(data);
+		// });
 
 
-<footer>
-	<p>@201309</p>
-</footer>
+	</script>
+</body>
